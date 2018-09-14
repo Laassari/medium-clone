@@ -15,10 +15,11 @@ export class UserActions extends React.Component {
 
   render() {
     const avatar = this.state.avatar || userAvatar
-
+    const styles = { width: ' 38px', height: ' 38px', marginTop: '3px' }
+    
     return (
       <div onClick={this.showUserUi}>
-        <img src={avatar} alt="avatar" />
+        <img src={avatar} alt="avatar" style={styles} />
         <div className="user-ui" ref={this.userUiRef}>
           <ul>
             <li>
