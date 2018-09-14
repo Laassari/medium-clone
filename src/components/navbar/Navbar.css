@@ -17,10 +17,6 @@ nav {
   cursor: pointer;
 }
 
-.login a {
-  color: inherit;
-}
-
 .login ul {
   margin: 0;
   padding: 0;

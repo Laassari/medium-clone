@@ -9,3 +9,7 @@ body {
   --maxWidth: 1200px;
   --backgroundColor: #fff;
 }
+
+a {
+  color: inherit;
+}
