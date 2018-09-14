@@ -15,10 +15,10 @@ export class Landing extends React.Component {
           </p>
         </div>
         <div className="cta center-inline">
-          <Link className="btn" to="/">
+          <Link className="btn" to="/auth">
             Login
           </Link>
-          <Link className="btn" to="/">
+          <Link className="btn" to="/explore">
             Explore
           </Link>
         </div>
