@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import './Footer.css'
 
 const Footer = () => (
@@ -9,7 +8,7 @@ const Footer = () => (
       <span role="img" aria-label="heart emoji">
         💓
       </span>{' '}
-      by <Link to=""> Laassari</Link>
+      by <a href="https://github.com/Laassari/"> Laassari</a>
     </footer>
   </div>
 )
