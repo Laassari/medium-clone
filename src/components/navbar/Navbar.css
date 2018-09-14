@@ -29,7 +29,7 @@ nav {
   margin-bottom: 10px;
 }
 
-.login li:not(:last-child) {
+.login li {
   border-bottom: 1px solid lightgrey;
 }
 
@@ -38,6 +38,7 @@ nav {
 }
 
 .user-ui {
+  background: #fff;
   position: absolute;
   transform: scaleY(0);
   transition: 100ms all ease-in;
