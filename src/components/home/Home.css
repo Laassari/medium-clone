@@ -11,7 +11,7 @@
   position: fixed;
   width: 100%;
   z-index: -1;
-  background-image: url(/static/media/background.7e1bde1f.jpeg);
+  background-image: url('./background.jpeg');
   height: 100%;
   filter: blur(2px);
   top: 42px;
