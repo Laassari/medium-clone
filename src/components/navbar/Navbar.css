@@ -10,6 +10,7 @@ nav {
   height: 40px;
   align-items: center;
   justify-content: space-between;
+  padding: 0 10px;
 }
 
 .login {
@@ -44,6 +45,7 @@ nav {
   transition: 100ms all ease-in;
   transform-origin: top;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  left: -67px;
 }
 
 .user-ui a {
