@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
 import Navbar from './components/navbar/Navbar'
+import Home from './components/home/Home'
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Router>
+      <Router>
+        <div className="App">
           <Navbar />
-          {/* <Route path="/" component={}> */}
-        </Router>
-      </div>
+          <Route exact path="/" component={Home} />
+        </div>
+      </Router>
     )
   }
 }
