@@ -4,11 +4,12 @@ import userAvatar from './avatar.svg'
 import logoutIcon from './logout.svg'
 
 export class UserActions extends React.Component {
-  state = {}
+  state = {
+    userUiShown: false,
+  }
 
-  userUiRef = React.createRef()
   showUserUi = () => {
-    this.userUiRef.current.classList.toggle('user-ui-show')
+    this.setState(currState => ({ userUiShown: !currState.userUiShown }))
   }
 
   logOut = () => {}
@@ -16,11 +17,12 @@ export class UserActions extends React.Component {
   render() {
     const avatar = this.state.avatar || userAvatar
     const styles = { width: ' 38px', height: ' 38px', marginTop: '3px' }
-    
+    const { userUiShown } = this.state
+
     return (
       <div onClick={this.showUserUi}>
         <img src={avatar} alt="avatar" style={styles} />
-        <div className="user-ui" ref={this.userUiRef}>
+        <div className={`user-ui ${userUiShown ? 'user-ui-show' : ''}`}>
           <ul>
             <li>
               <Link to="/profile">Profile</Link>
