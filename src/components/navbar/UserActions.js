@@ -8,6 +8,22 @@ export class UserActions extends React.Component {
     userUiShown: false,
   }
 
+  componentDidMount() {
+    document.addEventListener('click', this.hideUserUi)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.hideUserUi)
+  }
+
+  hideUserUi = event => {
+    if (!this.state.userUiShown) return
+
+    if (!event.target.closest('.login')) {
+      this.setState(() => ({ userUiShown: false }))
+    }
+  }
+
   showUserUi = () => {
     this.setState(currState => ({ userUiShown: !currState.userUiShown }))
   }
