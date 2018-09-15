@@ -36,8 +36,13 @@ export class UserActions extends React.Component {
     const { userUiShown } = this.state
 
     return (
-      <div onClick={this.showUserUi}>
-        <img src={avatar} alt="avatar" style={styles} />
+      <div>
+        <img
+          onClick={this.showUserUi}
+          src={avatar}
+          alt="avatar"
+          style={styles}
+        />
         <div className={`user-ui ${userUiShown ? 'user-ui-show' : ''}`}>
           <ul>
             <li>
