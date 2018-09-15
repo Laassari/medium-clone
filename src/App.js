@@ -5,6 +5,7 @@ import Navbar from './components/navbar/Navbar'
 import Home from './components/home/Home'
 import Footer from './components/Footer'
 import PageNotFound from './components/PageNotFound'
+import Auth from './components/user/Auth'
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/auth" component={Auth} />
             <Route component={PageNotFound} />
           </Switch>
           <Footer />
