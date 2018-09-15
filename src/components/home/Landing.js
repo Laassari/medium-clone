@@ -10,8 +10,7 @@ export class Landing extends React.Component {
           <p>
             This an open source side project built with ReactJS, Redux, and
             Firebase among other tools and libraries. You can check the source
-            on <Link to="https://github.com/Laassari/medium-clone">Github</Link>
-            .
+            on <a href="https://github.com/Laassari/medium-clone">Github</a>.
           </p>
         </div>
         <div className="cta center-inline">
