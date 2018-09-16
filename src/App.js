@@ -7,20 +7,25 @@ import Footer from './components/Footer'
 import PageNotFound from './components/PageNotFound'
 import Auth from './components/user/Auth'
 
+import { Provider } from 'react-redux'
+import store from './store'
+
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/auth" component={Auth} />
-            <Route component={PageNotFound} />
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/auth" component={Auth} />
+              <Route component={PageNotFound} />
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      </Provider>
     )
   }
 }
