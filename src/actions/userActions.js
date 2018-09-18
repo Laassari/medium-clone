@@ -8,7 +8,7 @@ export const addUserToDb = user => {
       .doc(user.id)
       .set(user)
       .then(() => {
-        dispatch(ADD_NEW_USER_ACTION(user))
+        dispatch(setUser(user))
       })
       .catch(error => {
         console.error('Error writing document: ', error)
@@ -16,7 +16,7 @@ export const addUserToDb = user => {
   }
 }
 
-export const ADD_NEW_USER_ACTION = user => ({
+export const setUser = user => ({
   type: ADD_NEW_USER,
   payload: user,
 })
