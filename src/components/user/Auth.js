@@ -22,7 +22,6 @@ const Auth = props => {
             authResult.additionalUserInfo.username, //for Github
 
           id: authResult.user.uid,
-          loggedIn: true,
           avatarUrl: authResult.user.photoURL,
         }
 

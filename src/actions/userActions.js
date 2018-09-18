@@ -8,7 +8,7 @@ export const addUserToDb = user => {
       .doc(user.id)
       .set(user)
       .then(() => {
-        dispatch(setUser(user))
+        dispatch(setUser({ ...user, loggedIn: true }))
       })
       .catch(error => {
         console.error('Error writing document: ', error)
