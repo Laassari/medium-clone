@@ -6,10 +6,16 @@ const config = {
   authDomain: 'meduim-clone.firebaseapp.com',
   databaseURL: 'https://meduim-clone.firebaseio.com',
   projectId: 'meduim-clone',
-  storageBucket: '',
+  storageBucket: 'meduim-clone.appspot.com',
   messagingSenderId: '978295741901',
 }
 
 firebase.initializeApp(config)
 
+const db = firebase.firestore()
+db.settings({
+  timestampsInSnapshots: true,
+})
+
 export default firebase
+export {db, firebase}
