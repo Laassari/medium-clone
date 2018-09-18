@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import userAvatar from './avatar.svg'
+import { connect } from 'react-redux'
 import logoutIcon from './logout.svg'
 
 export class UserActions extends React.Component {
@@ -31,8 +31,13 @@ export class UserActions extends React.Component {
   logOut = () => {}
 
   render() {
-    const avatar = this.state.avatar || userAvatar
-    const styles = { width: ' 38px', height: ' 38px', marginTop: '3px' }
+    const avatar = this.props.user.avatarUrl
+    const styles = {
+      width: ' 38px',
+      height: ' 38px',
+      marginTop: '3px',
+      borderRadius: '50%',
+    }
     const { userUiShown } = this.state
 
     return (
@@ -58,4 +63,4 @@ export class UserActions extends React.Component {
   }
 }
 
-export default UserActions
+export default connect(state => ({ user: state.user }))(UserActions)
