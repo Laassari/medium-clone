@@ -1,4 +1,5 @@
 import userAvatar from './../components/navbar/avatar.svg'
+import { ADD_NEW_USER } from '../actions/Types'
 
 const initState = {
   username: '',
@@ -9,6 +10,9 @@ const initState = {
 
 const userReducer = (state = initState, action) => {
   switch (action.type) {
+    case ADD_NEW_USER:
+      const { username, loggedIn, id, avatarUrl } = action.payload
+      return { username, loggedIn, id, avatarUrl }
     default:
       return state
   }
