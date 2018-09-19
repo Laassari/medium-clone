@@ -30,7 +30,7 @@ const Auth = props => {
           props.addUserToDb(user).then(() => props.history.push('/'))
         } else {
           //returning user
-          props.setUser(user)
+          props.setUser({ ...user, loggedIn: true })
           props.history.push('/')
         }
       },
