@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import logoutIcon from './logout.svg'
+import { signOutUser } from '../../actions/userActions'
 
 export class UserActions extends React.Component {
   state = {
@@ -28,7 +29,9 @@ export class UserActions extends React.Component {
     this.setState(currState => ({ userUiShown: !currState.userUiShown }))
   }
 
-  logOut = () => {}
+  logOut = () => {
+    this.props.signOutUser()
+  }
 
   render() {
     const avatar = this.props.user.avatarUrl
@@ -63,4 +66,7 @@ export class UserActions extends React.Component {
   }
 }
 
-export default connect(state => ({ user: state.user }))(UserActions)
+export default connect(
+  state => ({ user: state.user }),
+  { signOutUser }
+)(UserActions)
