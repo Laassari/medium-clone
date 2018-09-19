@@ -1,5 +1,5 @@
 import { db } from '../components/user/Firebase'
-import { ADD_NEW_USER } from './Types'
+import { ADD_NEW_USER, SIGN_OUT_USER } from './Types'
 
 export const addUserToDb = user => {
   return dispatch => {
@@ -19,4 +19,8 @@ export const addUserToDb = user => {
 export const setUser = user => ({
   type: ADD_NEW_USER,
   payload: user,
+})
+
+export const signOutUser = () => ({
+  type: SIGN_OUT_USER,
 })
