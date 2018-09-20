@@ -17,6 +17,9 @@ export class UserActions extends React.Component {
     document.removeEventListener('click', this.hideUserUi)
   }
 
+  //the UI keep showing after changing route.
+  hideUiOnclik = () => this.setState({ userUiShown: false })
+
   hideUserUi = event => {
     if (!this.state.userUiShown) return
 
@@ -53,7 +56,10 @@ export class UserActions extends React.Component {
         />
         <div className={`user-ui ${userUiShown ? 'user-ui-show' : ''}`}>
           <ul>
-            <li>
+            <li onClick={this.hideUiOnclik}>
+              <Link to="/posts/new">New post</Link>
+            </li>
+            <li onClick={this.hideUiOnclik}>
               <Link to="/profile">Profile</Link>
             </li>
             <li onClick={this.logOut}>
