@@ -2,6 +2,7 @@ import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from './Firebase'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import propTypes from 'prop-types'
 import { addUserToDb, setUser } from '../../actions/userActions'
 import 'firebase/auth'
@@ -9,8 +10,7 @@ import './Auth.css'
 
 const Auth = props => {
   if (props.user.loggedIn) {
-    props.history.push('/')
-    return null
+    return <Redirect to="/" />
   }
 
   const uiConfig = {
