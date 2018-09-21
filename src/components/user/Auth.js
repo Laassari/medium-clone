@@ -23,6 +23,7 @@ const Auth = props => {
 
           id: authResult.user.uid,
           avatarUrl: authResult.user.photoURL,
+          signupDate: Date.now(),
         }
 
         if (authResult.additionalUserInfo.isNewUser) {
