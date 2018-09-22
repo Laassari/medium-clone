@@ -6,6 +6,7 @@ import 'froala-editor/css/froala_style.min.css'
 import 'froala-editor/css/froala_editor.pkgd.min.css'
 import 'font-awesome/css/font-awesome.css'
 import FroalaEditor from 'react-froala-wysiwyg'
+import { Redirect } from 'react-router-dom'
 import { db } from '../user/Firebase'
 
 import './NewPost.css'
@@ -102,6 +103,9 @@ export class NewPost extends Component {
   }
 
   render() {
+    if (!this.props.user.loggedIn) {
+      return <Redirect to="/auth" />
+    }
     return (
       <div className="new-post">
         <h1>Create a new post.</h1>
