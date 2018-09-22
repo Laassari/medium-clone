@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import PropTypes from 'prop-types'
+import propTypes from 'prop-types'
 import 'froala-editor/js/froala_editor.pkgd.min.js'
 import 'froala-editor/css/froala_style.min.css'
 import 'froala-editor/css/froala_editor.pkgd.min.css'
@@ -131,6 +131,10 @@ export class NewPost extends Component {
       </div>
     )
   }
+}
+
+NewPost.propTypes={
+  user: propTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
