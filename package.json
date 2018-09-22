@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@ckeditor/ckeditor5-build-inline": "^11.0.1",
-    "@ckeditor/ckeditor5-react": "^1.0.0-beta.1",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
@@ -40,6 +38,7 @@
     "react-dev-utils": "^5.0.2",
     "react-dom": "^16.5.0",
     "react-firebaseui": "^3.0.7",
+    "react-froala-wysiwyg": "^2.8.5",
     "react-hot-loader": "^4.3.6",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
