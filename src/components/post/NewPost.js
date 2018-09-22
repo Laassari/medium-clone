@@ -6,6 +6,7 @@ import 'froala-editor/css/froala_style.min.css'
 import 'froala-editor/css/froala_editor.pkgd.min.css'
 import 'font-awesome/css/font-awesome.css'
 import FroalaEditor from 'react-froala-wysiwyg'
+import { db } from '../user/Firebase'
 
 import './NewPost.css'
 
@@ -55,8 +56,40 @@ export class NewPost extends Component {
       'redo',
     ],
   }
+
+  uploadPost = (post, uid) => {
+    const postRef = db
+      .collection('users')
+      .doc(uid)
+      .collection('posts')
+      .doc()
+
+    postRef
+      .set(post)
+      .then(() => this.props.history.push('/'))
+      .catch(err => console.log(err))
+  }
+
   createPost = () => {
-    console.log(this.state.bodyText)
+    if (this.state.titleText === '') {
+      this.setState(() => ({ error: 'The title cannot be empty' }))
+      return
+    } else if (this.state.bodyText === '') {
+      this.setState(() => ({ error: 'The post body cannot be empty' }))
+      return
+    }
+    this.setState(() => ({ error: false }))
+
+    const { id: uid } = this.props.user
+
+    const post = {
+      title: this.state.titleText,
+      body: this.state.bodyText,
+      date: Date.now(),
+      claps: 0,
+    }
+
+    this.uploadPost(post, uid)
   }
 
   handleTitleTextChange = event => {
