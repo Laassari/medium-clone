@@ -58,12 +58,8 @@ export class NewPost extends Component {
     ],
   }
 
-  uploadPost = (post, uid) => {
-    const postRef = db
-      .collection('users')
-      .doc(uid)
-      .collection('posts')
-      .doc()
+  uploadPost = post => {
+    const postRef = db.collection('posts').doc()
 
     postRef
       .set(post)
@@ -91,7 +87,7 @@ export class NewPost extends Component {
       authorId: uid,
     }
 
-    this.uploadPost(post, uid)
+    this.uploadPost(post)
   }
 
   handleTitleTextChange = event => {
