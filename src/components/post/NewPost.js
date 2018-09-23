@@ -88,6 +88,7 @@ export class NewPost extends Component {
       body: this.state.bodyText,
       date: Date.now(),
       claps: 0,
+      authorId: uid,
     }
 
     this.uploadPost(post, uid)
@@ -133,8 +134,8 @@ export class NewPost extends Component {
   }
 }
 
-NewPost.propTypes={
-  user: propTypes.object.isRequired
+NewPost.propTypes = {
+  user: propTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
