@@ -32,7 +32,7 @@ export class NewPost extends Component {
     imageInsertButtons: ['imageBack', 'imageUpload', 'imageByURL'],
     imageMove: false,
     //@TODO: replace by a real endpoint
-    imageUploadURL: 'https://file.io/?expires=3y',
+    imageUploadURL: 'http://i.froala.com/upload',
     linkAlwaysBlank: true,
     linkInsertButtons: [],
     linkText: true,
