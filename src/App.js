@@ -7,6 +7,7 @@ import Footer from './components/Footer'
 import PageNotFound from './components/PageNotFound'
 import Auth from './components/user/Auth'
 import NewPost from './components/post/NewPost'
+import PostViewer from './components/post/PostViewer'
 
 import { Provider } from 'react-redux'
 import store from './store'
@@ -22,6 +23,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/auth" component={Auth} />
               <Route exact path="/posts/new" component={NewPost} />
+              <Route exact path="/posts/:postId" component={PostViewer} />
               <Route component={PageNotFound} />
             </Switch>
             <Footer />
