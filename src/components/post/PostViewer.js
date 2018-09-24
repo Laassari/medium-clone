@@ -70,19 +70,26 @@ class PostViewer extends React.Component {
     } = this.state
 
     return (
-      <div className="post-viewer">
-        {isFetching && <div>Loading... </div>}
+      <div className="post-viewer-wrapper">
+        {isFetching && <div className="error-message">Loading... </div>}
 
-        {error && <div>{error}</div>}
-        {notFound && <div>Post not found!</div>}
+        {error && <div className="error-message">{error}</div>}
+        {notFound && <div className="error-message">Post not found!</div>}
 
         {body.length > 0 ? (
-          <div className="post">
-            <img src={avatarUrl} alt="author avatar" />
-            author: {authorName}
-            <span>{date}</span>
-            <h1>{title}</h1>
-            <FroalaEditorView model={body} />
+          <div className="post-viewer">
+            <div className="details">
+              <img src={avatarUrl} alt="author avatar" />
+              <div>
+                author: {authorName}
+                <br />
+                <span>{date}</span>
+              </div>
+            </div>
+            <div className="post">
+              <h1>{title}</h1>
+              <FroalaEditorView model={body} />
+            </div>
           </div>
         ) : (
           false
