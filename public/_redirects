@@ -1,0 +1,2 @@
+#redirect everything to "/" react-router will handle the routing
+/*  /
