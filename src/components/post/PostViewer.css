@@ -56,6 +56,21 @@
   margin: 30px 0;
 }
 
+.post-viewer-wrapper .likes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px 0;
+  border-top: 2px solid #9a9a9a;
+  border-bottom: 2px solid #9a9a9a;
+  padding: 13px 0 13px;
+  padding-left: 12px;
+}
+.post-viewer-wrapper .likes img {
+  width: 20px;
+  margin-left: 9px;
+}
+
 .post-viewer-wrapper .comments {
   border: 1ps solid;
 }
