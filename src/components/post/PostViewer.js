@@ -3,8 +3,10 @@ import 'froala-editor/css/froala_style.min.css'
 import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView'
 import { connect } from 'react-redux'
 
-import { db } from '../user/Firebase'
+import { db, firebase } from '../user/Firebase'
 import './PostViewer.css'
+import likeIcon from './like.svg'
+import likedIcon from './liked.svg'
 
 class PostViewer extends React.Component {
   constructor(props) {
@@ -19,6 +21,7 @@ class PostViewer extends React.Component {
       avatarUrl: false,
       username: false,
       numberOfLikes: false,
+      hasLiked: false,
     }
   }
 
@@ -77,6 +80,35 @@ class PostViewer extends React.Component {
       })
   }
 
+  likePost = () => {
+    const { user } = this.props.user
+    if (user === '') {
+      //@TODO show a sign in poup
+    } else {
+      const { id: uid } = this.props.user
+      const { postId } = this.props.match.params
+      const likeRef = db.collection('likes').doc(postId)
+
+      if (this.state.hasLiked) {
+        likeRef
+          .update({ [uid]: firebase.firestore.FieldValue.delete() })
+          .then(() => {
+            this.setState(() => ({ hasLiked: false }))
+            this.getNumOfLikes()
+          })
+          .catch(err => console.log(err))
+      } else {
+        likeRef
+          .set({ [uid]: '' }, { merge: true })
+          .then(() => {
+            this.setState(() => ({ hasLiked: true }))
+            this.getNumOfLikes()
+          })
+          .catch(err => console.log(err))
+      }
+    }
+  }
+
   render() {
     const {
       isFetching,
@@ -89,6 +121,8 @@ class PostViewer extends React.Component {
       authorName,
       numberOfLikes,
     } = this.state
+
+    const likingIcon = this.state.hasLiked ? likedIcon : likeIcon
 
     return (
       <div className="post-viewer-wrapper">
@@ -120,7 +154,12 @@ class PostViewer extends React.Component {
 
         {/* claps section */}
         {body.length > 0 ? (
-          <div className="likes">{numberOfLikes} Like</div>
+          <div className="likes">
+            {numberOfLikes} Like(s){' '}
+            <button>
+              <img onClick={this.likePost} src={likingIcon} alt="like" />
+            </button>{' '}
+          </div>
         ) : null}
 
         {/* Comments section. */}
