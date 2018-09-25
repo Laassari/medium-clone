@@ -1,6 +1,7 @@
 import React from 'react'
 import 'froala-editor/css/froala_style.min.css'
 import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView'
+import { connect } from 'react-redux'
 
 import { db } from '../user/Firebase'
 import './PostViewer.css'
@@ -118,7 +119,9 @@ class PostViewer extends React.Component {
         )}
 
         {/* claps section */}
-        {body.length > 0 ? <div>{numberOfLikes} Like</div> : null}
+        {body.length > 0 ? (
+          <div className="likes">{numberOfLikes} Like</div>
+        ) : null}
 
         {/* Comments section. */}
         {/* <Comments /> */}
@@ -135,4 +138,8 @@ function objectSize(obj) {
   return size
 }
 
-export default PostViewer
+const mapStateToProps = state => ({
+  user: state.user,
+})
+
+export default connect(mapStateToProps)(PostViewer)
