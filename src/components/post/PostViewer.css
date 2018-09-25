@@ -66,9 +66,18 @@
   padding: 13px 0 13px;
   padding-left: 12px;
 }
+
+.post-viewer-wrapper .likes button {
+  background: transparent;
+  border: 0;
+  margin-left: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
 .post-viewer-wrapper .likes img {
   width: 20px;
-  margin-left: 9px;
 }
 
 .post-viewer-wrapper .comments {
