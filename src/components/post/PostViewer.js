@@ -17,6 +17,7 @@ class PostViewer extends React.Component {
       date: '',
       avatarUrl: false,
       username: false,
+      numberOfLikes: false,
     }
   }
 
@@ -47,6 +48,9 @@ class PostViewer extends React.Component {
           const { title, body } = data
           const date = new Date(data.date).toLocaleString()
           this.setState(() => ({ title, body, date, isFetching: false }))
+
+          //get likes count if doc exist or 0
+          this.getNumOfLikes()
         }
       })
       .catch(err =>
@@ -55,6 +59,21 @@ class PostViewer extends React.Component {
           isFetching: false,
         }))
       )
+  }
+
+  getNumOfLikes() {
+    const { postId } = this.props.match.params
+    db.collection('likes')
+      .doc(postId)
+      .get()
+      .then(doc => {
+        if (!doc.exists) this.setState(() => ({ numberOfLikes: 0 }))
+        else {
+          const likesObj = doc.data()
+          const numberOfLikes = Math.max(objectSize(likesObj), 0)
+          this.setState(() => ({ numberOfLikes }))
+        }
+      })
   }
 
   render() {
@@ -67,15 +86,18 @@ class PostViewer extends React.Component {
       date,
       avatarUrl,
       authorName,
+      numberOfLikes,
     } = this.state
 
     return (
       <div className="post-viewer-wrapper">
+        {/* Errors and loading state section. */}
         {isFetching && <div className="error-message">Loading... </div>}
 
         {error && <div className="error-message">{error}</div>}
         {notFound && <div className="error-message">Post not found!</div>}
 
+        {/* post section*/}
         {body.length > 0 ? (
           <div className="post-viewer">
             <div className="details">
@@ -94,9 +116,23 @@ class PostViewer extends React.Component {
         ) : (
           false
         )}
+
+        {/* claps section */}
+        {body.length > 0 ? <div>{numberOfLikes} Like</div> : null}
+
+        {/* Comments section. */}
+        {/* <Comments /> */}
       </div>
     )
   }
+}
+
+function objectSize(obj) {
+  let size = 0
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) size++
+  }
+  return size
 }
 
 export default PostViewer
