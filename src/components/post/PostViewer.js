@@ -55,6 +55,9 @@ class PostViewer extends React.Component {
 
           //get likes count if doc exist or 0
           this.getNumOfLikes()
+
+          //check wether the user liked the post or not
+          this.isPostLiked()
         }
       })
       .catch(err =>
@@ -78,6 +81,22 @@ class PostViewer extends React.Component {
           this.setState(() => ({ numberOfLikes }))
         }
       })
+  }
+
+  isPostLiked = () => {
+    const { id: uid } = this.props.user
+    const { postId } = this.props.match.params
+    const likeRef = db.collection('likes').doc(postId)
+
+    likeRef.get().then(doc => {
+      const users = doc.data()
+      if (uid in users) {
+        //user has liked the post
+        this.setState(() => ({ hasLiked: true }))
+      } else {
+        this.setState(() => ({ hasLiked: false }))
+      }
+    })
   }
 
   likePost = () => {
