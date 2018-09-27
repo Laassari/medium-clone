@@ -4,6 +4,7 @@ import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView'
 import { connect } from 'react-redux'
 
 import { db, firebase } from '../user/Firebase'
+import Comments from './Comments'
 import './PostViewer.css'
 import likeIcon from './like.svg'
 import likedIcon from './liked.svg'
@@ -90,6 +91,11 @@ class PostViewer extends React.Component {
 
     likeRef.get().then(doc => {
       const users = doc.data()
+      if (!users) {
+        //post has no likes
+        this.setState(() => ({ hasLiked: false }))
+        return
+      }
       if (uid in users) {
         //user has liked the post
         this.setState(() => ({ hasLiked: true }))
@@ -182,7 +188,7 @@ class PostViewer extends React.Component {
         ) : null}
 
         {/* Comments section. */}
-        {/* <Comments /> */}
+        {body.length > 0 ? <Comments /> : null}
       </div>
     )
   }
