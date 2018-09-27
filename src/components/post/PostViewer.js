@@ -149,6 +149,9 @@ class PostViewer extends React.Component {
 
     const likingIcon = this.state.hasLiked ? likedIcon : likeIcon
 
+    const { id: uid, loggedIn } = this.props.user
+    const { postId } = this.props.match.params
+
     return (
       <div className="post-viewer-wrapper">
         {/* Errors and loading state section. */}
@@ -188,7 +191,9 @@ class PostViewer extends React.Component {
         ) : null}
 
         {/* Comments section. */}
-        {body.length > 0 ? <Comments /> : null}
+        {body.length > 0 ? (
+          <Comments uid={uid} postId={postId} loggedIn={loggedIn} />
+        ) : null}
       </div>
     )
   }
