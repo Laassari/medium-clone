@@ -1,0 +1,39 @@
+.comments-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-section .new-comment {
+  margin: 20px 0;
+}
+
+.comments-section .new-comment textarea {
+  width: 80%;
+  height: 90px;
+  display: block;
+  margin-bottom: 12px;
+  padding: 8px;
+}
+
+.comments-section .new-comment button {
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 76%);
+  color: hsl(0, 0%, 0%);
+  border-radius: 3px;
+  margin: 0 12px 0 0;
+  align-self: normal;
+  font-size: 1rem;
+  box-shadow: 0 3px 6px hsla(0, 0%, 0%, 0.16), 0 3px 6px hsla(0, 0%, 0%, 0.23);
+}
+
+.comments-section > button {
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 76%);
+  color: hsl(0, 0%, 0%);
+  border-radius: 3px;
+  margin: 0 12px 0 0;
+  align-self: normal;
+  font-size: 1.4rem;
+  box-shadow: 0 3px 6px hsla(0, 0%, 0%, 0.16), 0 3px 6px hsla(0, 0%, 0%, 0.23);
+  margin: 20px 0;
+}
