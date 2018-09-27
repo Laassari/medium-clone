@@ -12,6 +12,7 @@ class Comments extends React.Component {
       loadingCommentError: false,
     }
   }
+
   handleCommentChange = event => {
     event.persist()
     this.setState(() => ({ commentText: event.target.value.trim() }))
