@@ -1,6 +1,8 @@
 import React from 'react'
 import propTypes from 'prop-types'
+
 import { db } from '../user/Firebase'
+import './Comments.css'
 
 class Comments extends React.Component {
   constructor(props) {
@@ -39,7 +41,7 @@ class Comments extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="comments-section">
         <div className="new-comment">
           <textarea
             placeholder="comment..."
