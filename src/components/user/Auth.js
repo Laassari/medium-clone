@@ -26,13 +26,19 @@ const Auth = props => {
           signupDate: Date.now(),
         }
 
+        //the last visited URL to return to
+        const { lastUrl } = props.location.state || {
+          lastUrl: { pathname: '/' },
+        }
+
         if (authResult.additionalUserInfo.isNewUser) {
           //sign up
-          props.addUserToDb(user).then(() => props.history.push('/'))
+          props.addUserToDb(user).then(() => props.history.push(lastUrl))
         } else {
           //returning user
           props.setUser({ ...user, loggedIn: true })
-          props.history.push('/')
+
+          props.history.push(lastUrl)
         }
       },
     },
