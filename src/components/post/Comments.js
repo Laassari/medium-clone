@@ -114,6 +114,7 @@ Comments.propTypes = {
   uid: propTypes.string.isRequired,
   postId: propTypes.string.isRequired,
   loggedIn: propTypes.bool.isRequired,
+  location: propTypes.string.isRequired,
 }
 
 export default Comments
