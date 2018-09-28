@@ -101,7 +101,11 @@ export class NewPost extends Component {
 
   render() {
     if (!this.props.user.loggedIn) {
-      return <Redirect to="/auth" />
+      return (
+        <Redirect
+          to={{ pathname: '/auth', state: { lastUrl: this.props.location } }}
+        />
+      )
     }
     return (
       <div className="new-post">
