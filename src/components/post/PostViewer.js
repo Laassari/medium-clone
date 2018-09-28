@@ -2,6 +2,8 @@ import React from 'react'
 import 'froala-editor/css/froala_style.min.css'
 import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView'
 import { connect } from 'react-redux'
+import Modal from 'react-modal'
+import { Redirect } from 'react-router-dom'
 
 import { db, firebase } from '../user/Firebase'
 import Comments from './Comments'
@@ -23,6 +25,11 @@ class PostViewer extends React.Component {
       username: false,
       numberOfLikes: false,
       hasLiked: false,
+      redirectLoggin: false,
+      modal: {
+        show: false,
+        content: '',
+      },
     }
   }
 
@@ -106,9 +113,12 @@ class PostViewer extends React.Component {
   }
 
   likePost = () => {
-    const { user } = this.props.user
-    if (user === '') {
-      //@TODO show a sign in poup
+    const { username } = this.props.user
+    if (username === '') {
+      this.setState(() => ({
+        modal: { show: true, content: 'you must loggin to Like a post' },
+      }))
+      return
     } else {
       const { id: uid } = this.props.user
       const { postId } = this.props.match.params
@@ -134,6 +144,11 @@ class PostViewer extends React.Component {
     }
   }
 
+  hideModal = () =>
+    this.setState(state => ({ modal: { ...state.modal, show: false } }))
+
+  redirectToLoggin = () => this.setState(() => ({ redirectLoggin: true }))
+
   render() {
     const {
       isFetching,
@@ -152,6 +167,17 @@ class PostViewer extends React.Component {
     const { id: uid, loggedIn } = this.props.user
     const { postId } = this.props.match.params
 
+    const showModal = this.state.modal.show
+    const modalContent = this.state.modal.content
+
+    if (this.state.redirectLoggin) {
+      return (
+        <Redirect
+          to={{ pathname: '/auth', state: { lastUrl: this.props.location } }}
+        />
+      )
+    }
+
     return (
       <div className="post-viewer-wrapper">
         {/* Errors and loading state section. */}
@@ -159,6 +185,24 @@ class PostViewer extends React.Component {
 
         {error && <div className="error-message">{error}</div>}
         {notFound && <div className="error-message">Post not found!</div>}
+
+        {/* Loggin modal */}
+        <Modal
+          isOpen={showModal}
+          onRequestClose={this.hideModal}
+          appElement={document.getElementById('root')}
+          className="modal"
+        >
+          <p>{modalContent}</p>
+          <div>
+            <button className="cancel" onClick={this.hideModal}>
+              Cancel
+            </button>
+            <button className="login" onClick={this.redirectToLoggin}>
+              Logg in
+            </button>
+          </div>
+        </Modal>
 
         {/* post section*/}
         {body.length > 0 ? (
@@ -184,7 +228,7 @@ class PostViewer extends React.Component {
         {body.length > 0 ? (
           <div className="likes">
             {numberOfLikes} Like(s){' '}
-            <button>
+            <button type="button">
               <img onClick={this.likePost} src={likingIcon} alt="like" />
             </button>{' '}
           </div>
