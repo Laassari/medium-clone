@@ -236,7 +236,12 @@ class PostViewer extends React.Component {
 
         {/* Comments section. */}
         {body.length > 0 ? (
-          <Comments uid={uid} postId={postId} loggedIn={loggedIn} />
+          <Comments
+            uid={uid}
+            postId={postId}
+            loggedIn={loggedIn}
+            location={this.props.location}
+          />
         ) : null}
       </div>
     )

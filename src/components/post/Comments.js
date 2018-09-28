@@ -1,5 +1,7 @@
 import React from 'react'
 import propTypes from 'prop-types'
+import Modal from 'react-modal'
+import { Redirect } from 'react-router-dom'
 
 import { db } from '../user/Firebase'
 import './Comments.css'
@@ -12,6 +14,11 @@ class Comments extends React.Component {
       commentText: '',
       commentsLoading: false,
       loadingCommentError: false,
+      redirectLoggin: false,
+      modal: {
+        show: false,
+        content: '',
+      },
     }
   }
 
@@ -24,7 +31,9 @@ class Comments extends React.Component {
 
   createComment = () => {
     if (!this.props.loggedIn) {
-      //@TODO show a modal with login
+      this.setState(() => ({
+        modal: { show: true, content: 'you must loggin to post a comment' },
+      }))
       return
     }
     if (this.state.commentText === '') return
@@ -39,7 +48,23 @@ class Comments extends React.Component {
     commentRef.add({ comment })
   }
 
+  hideModal = () =>
+    this.setState(state => ({ modal: { ...state.modal, show: false } }))
+
+  redirectToLoggin = () => this.setState(() => ({ redirectLoggin: true }))
+
   render() {
+    const showModal = this.state.modal.show
+    const modalContent = this.state.modal.content
+
+    if (this.state.redirectLoggin) {
+      return (
+        <Redirect
+          to={{ pathname: '/auth', state: { lastUrl: this.props.location } }}
+        />
+      )
+    }
+
     return (
       <div className="comments-section">
         <div className="new-comment">
@@ -49,6 +74,24 @@ class Comments extends React.Component {
           />
           <button onClick={this.createComment}>Comment</button>
         </div>
+
+        {/* Loggin modal */}
+        <Modal
+          isOpen={showModal}
+          onRequestClose={this.hideModal}
+          appElement={document.getElementById('root')}
+          className="modal"
+        >
+          <p>{modalContent}</p>
+          <div>
+            <button className="cancel" onClick={this.hideModal}>
+              Cancel
+            </button>
+            <button className="login" onClick={this.redirectToLoggin}>
+              Logg in
+            </button>
+          </div>
+        </Modal>
 
         {/*  hide the once cliked */}
         {!this.state.showCommentCliced && (
