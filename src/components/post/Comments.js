@@ -43,6 +43,8 @@ class Comments extends React.Component {
     const comment = {
       uid,
       content: this.state.commentText,
+      createdAt: Date.now(),
+      likes: [],
     }
 
     commentRef.set({ comment })
