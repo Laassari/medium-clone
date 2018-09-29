@@ -18,6 +18,8 @@ export class NewPost extends Component {
       titleText: '',
       bodyText: '',
       error: false,
+      redirectToPost: false,
+      postId: '',
     }
   }
 
@@ -60,10 +62,12 @@ export class NewPost extends Component {
 
   uploadPost = post => {
     const postRef = db.collection('posts').doc()
+    const postId = postRef.id
+    this.setState(() => ({ postId }))
 
     postRef
       .set(post)
-      .then(() => this.props.history.push('/'))
+      .then(() => this.setState(() => ({ redirectToPost: true })))
       .catch(err => console.log(err))
   }
 
@@ -107,6 +111,11 @@ export class NewPost extends Component {
         />
       )
     }
+
+    if (this.state.redirectToPost) {
+      return <Redirect to={`/posts/${this.state.postId}`} />
+    }
+
     return (
       <div className="new-post">
         <h1>Create a new post.</h1>
