@@ -45,7 +45,7 @@ class Comments extends React.Component {
       content: this.state.commentText,
     }
 
-    commentRef.add({ comment })
+    commentRef.set({ comment })
   }
 
   hideModal = () =>
@@ -114,7 +114,7 @@ Comments.propTypes = {
   uid: propTypes.string.isRequired,
   postId: propTypes.string.isRequired,
   loggedIn: propTypes.bool.isRequired,
-  location: propTypes.string.isRequired,
+  location: propTypes.object.isRequired,
 }
 
 export default Comments
