@@ -59,6 +59,29 @@ class Comments extends React.Component {
 
   redirectToLoggin = () => this.setState(() => ({ redirectLoggin: true }))
 
+  fetchComments = () => {
+    const { postId } = this.props
+    const commentsRef = db
+      .collection('comments')
+      .doc(postId)
+      .collection('comments')
+
+    this.setState(() => ({ commentsLoading: true }))
+
+    commentsRef
+      .get()
+      .then(snapshot => {
+        this.setState(() => ({ commentsLoading: false }))
+        snapshot.docs.forEach(doc => {
+          console.log(doc.data())
+        })
+      })
+      .catch(() => {
+        this.setState(() => ({ commentsLoading: false }))
+        this.setState(() => ({ loadingCommentError: true }))
+      })
+  }
+
   render() {
     const showModal = this.state.modal.show
     const modalContent = this.state.modal.content
@@ -101,13 +124,21 @@ class Comments extends React.Component {
 
         {/*  hide the once cliked */}
         {!this.state.showCommentCliced && (
-          <button onClick={this.hideCommentsButton}>Show comments</button>
+          <button
+            onClick={() => {
+              this.hideCommentsButton()
+              this.fetchComments()
+            }}
+          >
+            Show comments
+          </button>
         )}
+
         {this.state.showCommentCliced &&
           (this.state.commentsLoading ? (
-            <div>Loading...</div>
+            <div className="loading-comments">Loading...</div>
           ) : this.state.loadingCommentError ? (
-            <div>An error occured</div>
+            <div className="loading-comments-error">An error occured</div>
           ) : (
             <div className="comments">comments go here!</div>
           ))}
