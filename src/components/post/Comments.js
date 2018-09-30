@@ -38,7 +38,11 @@ class Comments extends React.Component {
     }
     if (this.state.commentText === '') return
     const { uid, postId } = this.props
-    const commentRef = db.collection('comments').doc(postId)
+    const commentRef = db
+      .collection('comments')
+      .doc(postId)
+      .collection('comments')
+      .doc(uid)
 
     const comment = {
       uid,
@@ -47,7 +51,7 @@ class Comments extends React.Component {
       likes: [],
     }
 
-    commentRef.set({ comment })
+    commentRef.set(comment, { merge: true })
   }
 
   hideModal = () =>
