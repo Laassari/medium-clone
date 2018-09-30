@@ -37,3 +37,17 @@
   box-shadow: 0 3px 6px hsla(0, 0%, 0%, 0.16), 0 3px 6px hsla(0, 0%, 0%, 0.23);
   margin: 20px 0;
 }
+
+.comments-section .loading-comments,
+.loading-comments-error {
+  padding: 4px;
+  margin: 20px 0;
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 3px 6px hsla(0, 0%, 0%, 0.16), 0 3px 6px hsla(0, 0%, 0%, 0.23);
+}
+
+.loading-comments-error {
+  color: hsl(340, 82%, 52%);
+}
