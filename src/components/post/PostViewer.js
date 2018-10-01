@@ -164,7 +164,7 @@ class PostViewer extends React.Component {
 
     const likingIcon = this.state.hasLiked ? likedIcon : likeIcon
 
-    const { id: uid, loggedIn } = this.props.user
+    const { id: uid, loggedIn, username } = this.props.user
     const { postId } = this.props.match.params
 
     const showModal = this.state.modal.show
@@ -241,6 +241,8 @@ class PostViewer extends React.Component {
             postId={postId}
             loggedIn={loggedIn}
             location={this.props.location}
+            avatarUrl={avatarUrl}
+            authorName={username}
           />
         ) : null}
       </div>

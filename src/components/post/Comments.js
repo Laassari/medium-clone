@@ -3,6 +3,7 @@ import propTypes from 'prop-types'
 import Modal from 'react-modal'
 import { Redirect } from 'react-router-dom'
 
+import userAvatar from '../navbar/avatar.svg'
 import { db } from '../user/Firebase'
 import './Comments.css'
 
@@ -10,6 +11,7 @@ class Comments extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      comments: [],
       showCommentCliced: false,
       commentText: '',
       commentsLoading: false,
@@ -37,7 +39,8 @@ class Comments extends React.Component {
       return
     }
     if (this.state.commentText === '') return
-    const { uid, postId } = this.props
+    const { uid, postId, avatarUrl, authorName } = this.props
+
     const commentRef = db
       .collection('comments')
       .doc(postId)
@@ -49,6 +52,8 @@ class Comments extends React.Component {
       content: this.state.commentText,
       createdAt: Date.now(),
       likes: [],
+      authorName,
+      avatarUrl,
     }
 
     commentRef.set(comment, { merge: true })
@@ -60,6 +65,7 @@ class Comments extends React.Component {
   redirectToLoggin = () => this.setState(() => ({ redirectLoggin: true }))
 
   fetchComments = () => {
+    const comments = []
     const { postId } = this.props
     const commentsRef = db
       .collection('comments')
@@ -73,8 +79,20 @@ class Comments extends React.Component {
       .then(snapshot => {
         this.setState(() => ({ commentsLoading: false }))
         snapshot.docs.forEach(doc => {
+          const data = doc.data()
+          const comment = {
+            content: data.content,
+            createdAt: data.createdAt,
+            likesNumber: data.likes.length,
+            authorName: data.authorName || 'user',
+            avatarUrl: data.avatarUrl || userAvatar,
+          }
+
+          comments.push(comment)
           console.log(doc.data())
         })
+
+        this.setState(() => ({ comments }))
       })
       .catch(() => {
         this.setState(() => ({ commentsLoading: false }))
@@ -152,6 +170,8 @@ Comments.propTypes = {
   postId: propTypes.string.isRequired,
   loggedIn: propTypes.bool.isRequired,
   location: propTypes.object.isRequired,
+  avatarUrl: propTypes.string,
+  authorName: propTypes.string,
 }
 
 export default Comments
