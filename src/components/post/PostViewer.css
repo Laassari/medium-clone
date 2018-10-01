@@ -82,10 +82,6 @@
   width: 20px;
 }
 
-.post-viewer-wrapper .comments {
-  border: 1ps solid;
-}
-
 .post-viewer-wrapper .error-message {
   text-align: center;
   font-size: 2rem;
