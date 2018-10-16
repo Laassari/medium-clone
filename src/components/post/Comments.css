@@ -26,7 +26,7 @@
   box-shadow: 0 3px 6px hsla(0, 0%, 0%, 0.16), 0 3px 6px hsla(0, 0%, 0%, 0.23);
 }
 
-.comments-section > button {
+.comments-section button.show-comments {
   background: hsl(0, 0%, 100%);
   border: 1px solid hsl(0, 0%, 76%);
   color: hsl(0, 0%, 0%);
@@ -36,6 +36,42 @@
   font-size: 1.4rem;
   box-shadow: 0 3px 6px hsla(0, 0%, 0%, 0.16), 0 3px 6px hsla(0, 0%, 0%, 0.23);
   margin: 20px 0;
+}
+
+/* A comment card */
+.comments-section .comment {
+  padding: 15px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23),
+    0 -2px 6px rgba(0, 0, 0, 0.23);
+  margin-bottom: 30px;
+}
+
+.comments-section .comment .author {
+  display: flex;
+  align-items: center;
+}
+.comments-section .comment .author img {
+  border-radius: 50%;
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+}
+.comments-section .comment .author .created-at {
+  margin-top: 4px;
+  color: #8a8a8a;
+}
+
+.comments-section .comment .content {
+  margin-left: 70px;
+  color: #5d5d5d;
+  line-height: 1.2;
+  font-size: 1.1rem;
+}
+
+.comments-section .comment .info {
+  margin-left: 70px;
+  padding-top: 20px;
+  display: flex;
 }
 
 .comments-section .loading-comments,
@@ -50,4 +86,13 @@
 
 .loading-comments-error {
   color: hsl(340, 82%, 52%);
+}
+
+.comments-section .comments {
+  margin: 20px 0;
+}
+
+/*  */
+.bold {
+  font-weight: bold;
 }
