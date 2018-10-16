@@ -3,6 +3,7 @@ import propTypes from 'prop-types'
 import Modal from 'react-modal'
 import { Redirect } from 'react-router-dom'
 
+import Comment from './Comment'
 import userAvatar from '../navbar/avatar.svg'
 import { db } from '../user/Firebase'
 import './Comments.css'
@@ -89,7 +90,6 @@ class Comments extends React.Component {
           }
 
           comments.push(comment)
-          console.log(doc.data())
         })
 
         this.setState(() => ({ comments }))
@@ -147,6 +147,7 @@ class Comments extends React.Component {
               this.hideCommentsButton()
               this.fetchComments()
             }}
+            className="show-comments"
           >
             Show comments
           </button>
@@ -158,7 +159,15 @@ class Comments extends React.Component {
           ) : this.state.loadingCommentError ? (
             <div className="loading-comments-error">An error occured</div>
           ) : (
-            <div className="comments">comments go here!</div>
+            <div className="comments">
+              {this.state.comments.length === 0 ? (
+                <p>No comments to show</p>
+              ) : (
+                this.state.comments.map(comment => (
+                  <Comment key={comment.createdAt} {...comment} />
+                ))
+              )}
+            </div>
           ))}
       </div>
     )
