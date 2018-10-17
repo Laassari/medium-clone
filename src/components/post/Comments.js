@@ -27,7 +27,7 @@ class Comments extends React.Component {
 
   handleCommentChange = event => {
     event.persist()
-    this.setState(() => ({ commentText: event.target.value.trim() }))
+    this.setState(() => ({ commentText: event.target.value }))
   }
 
   hideCommentsButton = () => this.setState(() => ({ showCommentCliced: true }))
@@ -39,7 +39,7 @@ class Comments extends React.Component {
       }))
       return
     }
-    if (this.state.commentText === '') return
+    if (this.state.commentText.trim() === '') return
     const { uid, postId, avatarUrl, authorName } = this.props
 
     const commentRef = db
@@ -50,7 +50,7 @@ class Comments extends React.Component {
 
     const comment = {
       uid,
-      content: this.state.commentText,
+      content: this.state.commentText.trim(),
       createdAt: Date.now(),
       likes: [],
       authorName,
