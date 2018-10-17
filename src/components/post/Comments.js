@@ -84,6 +84,8 @@ class Comments extends React.Component {
         snapshot.docs.forEach(doc => {
           const data = doc.data()
           const comment = {
+            commentId: doc.id,
+            likesArray: data.likes,
             content: data.content,
             createdAt: data.createdAt,
             likesNumber: data.likes.length,
@@ -118,7 +120,7 @@ class Comments extends React.Component {
       <div className="comments-section">
         <div className="new-comment">
           <textarea
-          value={this.state.commentText}
+            value={this.state.commentText}
             placeholder="comment..."
             onChange={this.handleCommentChange}
           />
@@ -167,7 +169,13 @@ class Comments extends React.Component {
                 <p>No comments to show</p>
               ) : (
                 this.state.comments.map(comment => (
-                  <Comment key={comment.createdAt} {...comment} />
+                  <Comment
+                    uid={this.props.uid}
+                    loggedIn={this.props.loggedIn}
+                    postId={this.props.postId}
+                    key={comment.createdAt}
+                    {...comment}
+                  />
                 ))
               )}
             </div>
