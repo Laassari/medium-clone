@@ -74,6 +74,20 @@
   display: flex;
 }
 
+.comments-section .comment .info .like-comment {
+  background: transparent;
+  border: 0;
+  margin-left: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.comments-section .comment .info .like-comment img {
+  width: 20px;
+  height: 20px;
+}
+
 .comments-section .loading-comments,
 .loading-comments-error {
   padding: 4px;
