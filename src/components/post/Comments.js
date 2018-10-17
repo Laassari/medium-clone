@@ -57,7 +57,9 @@ class Comments extends React.Component {
       avatarUrl,
     }
 
-    commentRef.set(comment, { merge: true })
+    commentRef
+      .set(comment, { merge: true })
+      .then(() => this.setState(() => ({ commentText: '' })))
   }
 
   hideModal = () =>
@@ -116,6 +118,7 @@ class Comments extends React.Component {
       <div className="comments-section">
         <div className="new-comment">
           <textarea
+          value={this.state.commentText}
             placeholder="comment..."
             onChange={this.handleCommentChange}
           />
