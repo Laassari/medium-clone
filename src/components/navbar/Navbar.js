@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import propTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import UserAction from './UserActions'
 import logo from './logo.svg'
 import './Navbar.css'
@@ -18,7 +18,18 @@ export class Navbar extends React.Component {
             </Link>
           </div>
           <div className="login">
-            {loggedIn ? <UserAction /> : <Link to="/auth">Login</Link>}
+            {loggedIn ? (
+              <UserAction />
+            ) : (
+              <Link
+                to={{
+                  pathname: '/auth',
+                  state: { lastUrl: this.props.location },
+                }}
+              >
+                Login
+              </Link>
+            )}
           </div>
         </nav>
       </div>
@@ -34,4 +45,4 @@ const mapPropToState = state => ({
   user: state.user,
 })
 
-export default connect(mapPropToState)(Navbar)
+export default withRouter(connect(mapPropToState)(Navbar))
