@@ -57,9 +57,12 @@ class Comments extends React.Component {
       avatarUrl,
     }
 
-    commentRef
-      .set(comment, { merge: true })
-      .then(() => this.setState(() => ({ commentText: '' })))
+    commentRef.set(comment, { merge: true }).then(() => {
+      this.setState(() => ({ commentText: '' }))
+
+      // re render with all the comments
+      this.fetchComments()
+    })
   }
 
   hideModal = () =>
