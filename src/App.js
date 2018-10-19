@@ -13,12 +13,17 @@ import TopStories from './components/topPosts/TopPosts'
 import { Provider } from 'react-redux'
 import store from './store'
 
+const styles = {
+  display: 'flex',
+  flexDirection: 'column',
+}
+
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
+          <div className="App" style={styles}>
             <Navbar />
             <Switch>
               <Route exact path="/" component={Home} />
